@@ -112,10 +112,28 @@ button:hover {
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
+
+.participants-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.success {
-  background-color: #e8f5e9;
+.participant-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25em;
+}
+
+.delete-participant {
+  color: #c00;
+  font-size: 1.1em;
+  margin-left: 0.5em;
+  transition: color 0.2s;
+}
+.delete-participant:hover {
+  color: #f33;
+}
   color: #2e7d32;
   border: 1px solid #a5d6a7;
 }

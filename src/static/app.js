@@ -56,8 +56,42 @@ document.addEventListener("DOMContentLoaded", () => {
             nameSpan.className = "participant-name";
             nameSpan.textContent = p;
 
+            // Delete icon
+            const deleteBtn = document.createElement("span");
+            deleteBtn.className = "delete-participant";
+            deleteBtn.title = "Remove participant";
+            deleteBtn.innerHTML = "&#128465;"; // Trash can icon
+            deleteBtn.style.cursor = "pointer";
+            deleteBtn.style.marginLeft = "8px";
+            deleteBtn.addEventListener("click", async (e) => {
+              e.stopPropagation();
+              if (!confirm(`Remove ${p} from ${name}?`)) return;
+              try {
+                const response = await fetch(`/activities/${encodeURIComponent(name)}/unregister?email=${encodeURIComponent(p)}`, {
+                  method: "DELETE"
+                });
+                const result = await response.json();
+                if (response.ok) {
+                  fetchActivities();
+                  messageDiv.textContent = result.message;
+                  messageDiv.className = "success";
+                } else {
+                  messageDiv.textContent = result.detail || "Failed to remove participant.";
+                  messageDiv.className = "error";
+                }
+                messageDiv.classList.remove("hidden");
+                setTimeout(() => messageDiv.classList.add("hidden"), 5000);
+              } catch (err) {
+                messageDiv.textContent = "Error removing participant.";
+                messageDiv.className = "error";
+                messageDiv.classList.remove("hidden");
+                setTimeout(() => messageDiv.classList.add("hidden"), 5000);
+              }
+            });
+
             li.appendChild(avatar);
             li.appendChild(nameSpan);
+            li.appendChild(deleteBtn);
             ul.appendChild(li);
           });
         } else {
@@ -105,6 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
