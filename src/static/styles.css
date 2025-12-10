@@ -112,10 +112,28 @@ button:hover {
   margin-top: 20px;
   padding: 10px;
   border-radius: 4px;
+
+.participants-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.success {
-  background-color: #e8f5e9;
+.participant-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25em;
+}
+
+.delete-participant {
+  color: #c00;
+  font-size: 1.1em;
+  margin-left: 0.5em;
+  transition: color 0.2s;
+}
+.delete-participant:hover {
+  color: #f33;
+}
   color: #2e7d32;
   border: 1px solid #a5d6a7;
 }
@@ -141,4 +159,60 @@ footer {
   margin-top: 30px;
   padding: 20px;
   color: #666;
+}
+
+.participants {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px dashed #eee;
+}
+
+.participants h5 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #1a237e;
+}
+
+.participants-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  background-color: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.participant-item .avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3949ab, #1a237e);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.participant-item .participant-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.participant-empty {
+  color: #777;
+  font-style: italic;
+  padding: 6px 10px;
 }
